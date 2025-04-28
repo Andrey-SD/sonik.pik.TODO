@@ -1,0 +1,105 @@
+body {
+  background-color: #79c0f2;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button img {
+  width: 20px;
+}
+
+.todo-list {
+  width: 700px;
+  background-color: #ffffff;
+  border: 1px solid rgb(138, 173, 204);
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.fl {
+  display: flex;
+  justify-content: center;
+}
+
+.todo-header,
+.add-container {
+  margin-bottom: 1.25rem;
+}
+
+.add-container,
+.task-row {
+  background-color: #EDEEF0;
+  padding: 0;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+
+.add-container {
+  border-radius: 100px;
+  font-size: 1.875rem;
+}
+
+.add-container input,
+.task-text {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: inherit;
+  padding-left: 1.25rem;
+}
+
+.add-container input:focus,
+.add-container input:active,
+.task-row input:focus {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.add-container .button {
+  background-color: #79c0f2;
+  border: none;
+  font-size: inherit;
+  border-radius: 50%;
+  width: 3.125rem;
+  aspect-ratio: 1/1;
+}
+
+.add-container .button:hover {
+  cursor: pointer;
+}
+
+.task-row {
+  font-size: 1.25rem;
+  border-radius: 5px;
+  padding: 5px 1.25rem;
+  gap: 10px;
+  align-items: center;
+}
+
+.task-text {
+  width: 100%;
+}
+
+.task-text:disabled {
+color: black;
+}
+
+.task-row .button {
+  border: none;
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+  background-color: transparent;
+}
+
+.task-row .button:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+</head>
+
+<body class="fl">
+  <div class="todo-list">
+    <div class="todo-header fl">
+      <h1>СПИСОК ЗАВДАНЬ</h1>
+    </div>
+    <div class="add-container fl">
+      <input type="text" name="task" id="inp" placeholder="Додати завдання" autocomplete="off">
+      <a href="#" class="button" onclick="addTask()">+</a>
+    </div>
+    <div class="task-container" id="tcontainer">
+      {% for task in tasks %}
+      <div class="task-row fl" id="task-{{ task.id }}">
+        
+        <input type="checkbox" class="task-status" id="status-{{ task.id }}" onclick="updateStatus({{ task.id }})" {% if
+          task.status=='true' %}checked{% endif %} >
+
+        <input class="task-text" value="{{ task.content }}" disabled
+          style="text-decoration: {% if task.status == 'true' %}line-through{% endif %};" onChange="updateTask({{ task.id }})">
+
+        <a class="button task-control" href="#" onclick="editTask({{ task.id }})">
+          <img src="static/img/edit.png" alt="">
+        </a>
+        <a class="task-control button" href="{{ url_for('delete_task', task_id=task.id) }}">
+          <img src="static/img/delete.png" alt="">
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    function addTask() {
+      const task = document.getElementById("inp").value;
+      if (task) {
+        window.location.href = `/add_task?task=${encodeURIComponent(task)}`;
+      }
+    }
+
+    function updateStatus(taskId) {
+      const checkbox = document.getElementById(`status-${taskId}`);
+      const status = checkbox.checked ? 'true' : 'false';
+      window.location.href = `/update_status/${taskId}?status=${status}`;
+    }
+
+    function editTask(taskId) {
+      const inputField = document.getElementById(`task-${taskId}`).querySelector(".task-text")
+      inputField.removeAttribute("disabled");
+      inputField.focus();
+      inputField.setSelectionRange(inputField.value.length, inputField.value.length);
+    }
+
+    function updateTask(taskId) {
+      const inputField = document.getElementById(`task-${taskId}`).querySelector(".task-text")
+      inputField.setAttribute("disabled", "");
+      const task = inputField.value;
+      window.location.href = `/update_task/${taskId}?task=${encodeURIComponent(task)}`;
+    }
+
+  </script>
+</body>
+
+</html>
